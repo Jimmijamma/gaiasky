@@ -1,12 +1,20 @@
 gaia.cu9.ari.gaiaorbit
+gaia.cu9.ari.gaiaorbit.analytics
 gaia.cu9.ari.gaiaorbit.assets
 gaia.cu9.ari.gaiaorbit.data
+gaia.cu9.ari.gaiaorbit.data.cluster
 gaia.cu9.ari.gaiaorbit.data.constel
+gaia.cu9.ari.gaiaorbit.data.galaxy
 gaia.cu9.ari.gaiaorbit.data.group
 gaia.cu9.ari.gaiaorbit.data.octreegen
 gaia.cu9.ari.gaiaorbit.data.octreegen.particlegroup
 gaia.cu9.ari.gaiaorbit.data.orbit
 gaia.cu9.ari.gaiaorbit.data.stars
+gaia.cu9.ari.gaiaorbit.desktop
+gaia.cu9.ari.gaiaorbit.desktop.concurrent
+gaia.cu9.ari.gaiaorbit.desktop.format
+gaia.cu9.ari.gaiaorbit.desktop.render
+gaia.cu9.ari.gaiaorbit.desktop.util
 gaia.cu9.ari.gaiaorbit.event
 gaia.cu9.ari.gaiaorbit.interfce
 gaia.cu9.ari.gaiaorbit.interfce.beans
@@ -16,6 +24,7 @@ gaia.cu9.ari.gaiaorbit.render.system
 gaia.cu9.ari.gaiaorbit.scenegraph
 gaia.cu9.ari.gaiaorbit.scenegraph.component
 gaia.cu9.ari.gaiaorbit.scenegraph.octreewrapper
+gaia.cu9.ari.gaiaorbit.screenshot
 gaia.cu9.ari.gaiaorbit.script
 gaia.cu9.ari.gaiaorbit.util
 gaia.cu9.ari.gaiaorbit.util.camera
@@ -27,6 +36,7 @@ gaia.cu9.ari.gaiaorbit.util.coord.vsop87
 gaia.cu9.ari.gaiaorbit.util.ds
 gaia.cu9.ari.gaiaorbit.util.format
 gaia.cu9.ari.gaiaorbit.util.g3d
+gaia.cu9.ari.gaiaorbit.util.g3d.loader
 gaia.cu9.ari.gaiaorbit.util.gaia
 gaia.cu9.ari.gaiaorbit.util.gaia.time
 gaia.cu9.ari.gaiaorbit.util.gaia.utils
