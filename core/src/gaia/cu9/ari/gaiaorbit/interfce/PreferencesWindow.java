@@ -1455,8 +1455,7 @@ public class PreferencesWindow extends GenericDialog {
             GlobalConf.screen.LIMIT_FPS = 0;
         }
         if (GaiaSky.instance.getConfig() != null) {
-            GaiaSky.instance.getConfig().foregroundFPS = GlobalConf.screen.LIMIT_FPS;
-            GaiaSky.instance.getConfig().backgroundFPS = GlobalConf.screen.LIMIT_FPS;
+            GaiaSky.instance.getConfig().setIdleFPS(GlobalConf.screen.LIMIT_FPS);
         }
 
         // Orbit renderer

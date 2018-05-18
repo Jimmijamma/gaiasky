@@ -16,7 +16,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g3d.Model;
@@ -107,7 +107,7 @@ public class GaiaSky implements ApplicationListener, IObserver, IMainRenderer {
     private static boolean LOADING = false;
 
     /** Config object **/
-    private LwjglApplicationConfiguration cfg;
+    private Lwjgl3ApplicationConfiguration cfg;
 
     /** Attitude folder **/
     private static String ATTITUDE_FOLDER = "data/attitudexml/";
@@ -193,7 +193,7 @@ public class GaiaSky implements ApplicationListener, IObserver, IMainRenderer {
     /**
      * Creates a GaiaSky instance.
      */
-    public GaiaSky(LwjglApplicationConfiguration cfg) {
+    public GaiaSky(Lwjgl3ApplicationConfiguration cfg) {
         super();
         instance = this;
         this.cfg = cfg;
@@ -601,9 +601,28 @@ public class GaiaSky implements ApplicationListener, IObserver, IMainRenderer {
                 }
 
             }
+            if (GlobalConf.screen.LIMIT_FPS > 0) {
+                sleep(GlobalConf.screen.LIMIT_FPS);
+            }
         } catch (Throwable t) {
             EventManager.instance.post(Events.JAVA_EXCEPTION, t);
             // TODO implement error reporting?
+        }
+    }
+
+    private long diff, start = System.currentTimeMillis();
+
+    public void sleep(int fps) {
+        if (fps > 0) {
+            diff = System.currentTimeMillis() - start;
+            long targetDelay = 1000 / fps;
+            if (diff < targetDelay) {
+                try {
+                    Thread.sleep(targetDelay - diff);
+                } catch (InterruptedException e) {
+                }
+            }
+            start = System.currentTimeMillis();
         }
     }
 
@@ -780,7 +799,7 @@ public class GaiaSky implements ApplicationListener, IObserver, IMainRenderer {
         return out;
     }
 
-    public LwjglApplicationConfiguration getConfig() {
+    public Lwjgl3ApplicationConfiguration getConfig() {
         return this.cfg;
     }
 
