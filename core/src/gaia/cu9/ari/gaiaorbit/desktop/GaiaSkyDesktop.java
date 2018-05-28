@@ -245,7 +245,7 @@ public class GaiaSkyDesktop implements IObserver {
         cfg.useVsync(GlobalConf.screen.VSYNC);
         cfg.setWindowIcon(Files.FileType.Internal, "icon/ic_launcher.png");
         cfg.setIdleFPS(GlobalConf.screen.LIMIT_FPS);
-        cfg.useOpenGL3(true, 3, 2);
+        cfg.useOpenGL3(false, 3, 2);
 
         // Launch app
         Lwjgl3Application app = new Lwjgl3Application(new GaiaSky(cfg), cfg);
