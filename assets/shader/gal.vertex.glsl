@@ -1,11 +1,5 @@
 #version 120
 
-#ifdef GL_ES
-precision mediump float;
-precision mediump int;
-#endif
-
-
 <INCLUDE shader/lib_math.glsl>
 <INCLUDE shader/lib_geometry.glsl>
 
