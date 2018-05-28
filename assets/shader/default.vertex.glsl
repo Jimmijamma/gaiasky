@@ -26,11 +26,8 @@ uniform mat3 u_normalMatrix;
 varying vec3 v_normal;
 #endif // normalFlag
 
-#ifdef textureFlag
 attribute vec2 a_texCoord0;
 varying vec2 v_texCoords0;
-#endif // textureFlag
-
 
 uniform mat4 u_worldTrans;
 
@@ -230,9 +227,7 @@ varying vec3 v_atmosphereColor;
 void main() {
 	v_atmosphereColor = calculateAtmosphereGroundColor();
 	v_time = u_shininess;
-	#ifdef textureFlag
-		v_texCoords0 = a_texCoord0;
-	#endif // textureFlag
+	v_texCoords0 = a_texCoord0;
 
 	#if defined(colorFlag)
 		v_color = a_color;
@@ -270,17 +265,17 @@ void main() {
 		v_normal = normal;
 	#endif // normalFlag
 
-    #ifdef fogFlag
-        vec3 flen = u_cameraPosition.xyz - pos.xyz;
-        float fog = dot(flen, flen) * u_cameraPosition.w;
-        v_fog = min(fog, 1.0);
-    #endif
+        #ifdef fogFlag
+            vec3 flen = u_cameraPosition.xyz - pos.xyz;
+            float fog = dot(flen, flen) * u_cameraPosition.w;
+            v_fog = min(fog, 1.0);
+        #endif
 
 	#ifdef lightingFlag
 		#if	defined(ambientLightFlag)
-        	vec3 ambientLight = u_ambientLight;
+        	    vec3 ambientLight = u_ambientLight;
 		#elif defined(ambientFlag)
-        	vec3 ambientLight = vec3(0.0);
+        	    vec3 ambientLight = vec3(0.0);
 		#endif
 
 		#ifdef ambientCubemapFlag 		
@@ -332,7 +327,7 @@ void main() {
                                     // Add light to tangent zones
                                     vec3 view = normalize(u_cameraPosition.xyz - pos.xyz);
                                     float VdotN = 1.0 - dot(view, normal);
-                                    v_lightDiffuse += pow(VdotN  * 1.3, 10.0) * NdotL;
+                                    v_lightDiffuse += pow(VdotN, 10.0) * NdotL * 0.1;
                                 #endif // cameraPositionFlag
 
 				#ifdef specularFlag

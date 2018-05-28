@@ -54,7 +54,7 @@ import gaia.cu9.ari.gaiaorbit.interfce.KeyBindings.ProgramAction;
 import gaia.cu9.ari.gaiaorbit.interfce.beans.ComboBoxBean;
 import gaia.cu9.ari.gaiaorbit.interfce.beans.FileComboBoxBean;
 import gaia.cu9.ari.gaiaorbit.interfce.beans.LangComboBoxBean;
-import gaia.cu9.ari.gaiaorbit.scenegraph.CameraManager;
+import gaia.cu9.ari.gaiaorbit.scenegraph.camera.CameraManager;
 import gaia.cu9.ari.gaiaorbit.util.ConfInit;
 import gaia.cu9.ari.gaiaorbit.util.Constants;
 import gaia.cu9.ari.gaiaorbit.util.GlobalConf;
@@ -1447,7 +1447,12 @@ public class PreferencesWindow extends GenericDialog {
         GlobalConf.postprocess.POSTPROCESS_ANTIALIAS = GlobalConf.postprocess.getAntialias(bean.value);
         EventManager.instance.post(Events.ANTIALIASING_CMD, GlobalConf.postprocess.POSTPROCESS_ANTIALIAS);
         GlobalConf.screen.VSYNC = vsync.isChecked();
-        Gdx.graphics.setVSync(GlobalConf.screen.VSYNC);
+        try {
+            // Windows backend crashes for some reason
+            Gdx.graphics.setVSync(GlobalConf.screen.VSYNC);
+        } catch (Exception e) {
+            Logger.error(e, this.getClass().getSimpleName());
+        }
 
         if (limitfpsCb.isChecked()) {
             GlobalConf.screen.LIMIT_FPS = Integer.parseInt(limitFps.getText());

@@ -23,7 +23,7 @@ import gaia.cu9.ari.gaiaorbit.data.AssetBean;
 import gaia.cu9.ari.gaiaorbit.event.EventManager;
 import gaia.cu9.ari.gaiaorbit.event.Events;
 import gaia.cu9.ari.gaiaorbit.event.IObserver;
-import gaia.cu9.ari.gaiaorbit.scenegraph.ICamera;
+import gaia.cu9.ari.gaiaorbit.scenegraph.camera.ICamera;
 import gaia.cu9.ari.gaiaorbit.util.GlobalConf;
 import gaia.cu9.ari.gaiaorbit.util.I18n;
 import gaia.cu9.ari.gaiaorbit.util.Logger;
@@ -105,7 +105,7 @@ public class ModelComponent implements Disposable, IObserver {
             AssetBean.addAsset(modelFile, Model.class);
         }
 
-        if (forceinit || !GlobalConf.scene.LAZY_TEXTURE_INIT && tc != null) {
+        if ((forceinit || !GlobalConf.scene.LAZY_TEXTURE_INIT) && tc != null) {
             tc.initialize();
         }
 
@@ -158,7 +158,7 @@ public class ModelComponent implements Disposable, IObserver {
             materials.get("base").clear();
 
         // INITIALIZE MATERIAL
-        if (forceinit || !GlobalConf.scene.LAZY_TEXTURE_INIT && tc != null) {
+        if ((forceinit || !GlobalConf.scene.LAZY_TEXTURE_INIT) && tc != null) {
             tc.initMaterial(manager, materials, cc, culling);
         }
 
@@ -237,7 +237,7 @@ public class ModelComponent implements Disposable, IObserver {
             instance.model.dispose();
     }
 
-    public void setTransparency(float alpha) {
+    public void setTransparency(float alpha, int src, int dst) {
         if (instance != null) {
             int n = instance.materials.size;
             for (int i = 0; i < n; i++) {
@@ -245,13 +245,19 @@ public class ModelComponent implements Disposable, IObserver {
                 BlendingAttribute ba = null;
                 if (mat.has(BlendingAttribute.Type)) {
                     ba = (BlendingAttribute) mat.get(BlendingAttribute.Type);
+                    ba.destFunction = dst;
+                    ba.sourceFunction = src;
                 } else {
-                    ba = new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+                    ba = new BlendingAttribute(src, dst);
                     mat.set(ba);
                 }
                 ba.opacity = alpha;
             }
         }
+    }
+
+    public void setTransparency(float alpha) {
+        setTransparency(alpha, GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     }
 
     public void setTransparencyColor(float alpha) {

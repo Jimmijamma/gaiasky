@@ -14,6 +14,16 @@ An interface is provided in order to encapsulate some complex-behaviour
 functions and to make scripting easier. This scripting interface is
 described in the following section.
 
+Important notes on the scripting engine
+=======================================
+
+The scripting engine spawns a new thread for each script. Even though the thread is given maximum priority, this system is 
+non-deterministic by nature, so no one can guarantee when the thread will run and when the API calls will be issued. Simply put, 
+the scripts are not run in sync with the main loop. Instead, API calls are (for the most part) queued up and run after the
+current loop cycle, which updates the model and renders the frame. This prevents leaving the model in an inconsistent state by 
+updating it from two threads at the same time.
+
+
 The scripting API
 =================
 
@@ -25,6 +35,7 @@ API documentation
 The only up-to-date API documentation for each version is in the interface header files themselves. Below is a list of links to the different APIs.
 
 - `API Gaia Sky master (development branch) <https://github.com/langurmonkey/gaiasky/blob/master/core/src/gaia/cu9/ari/gaiaorbit/script/IScriptingInterface.java>`__
+- `API Gaia Sky 2.0.0 <https://github.com/langurmonkey/gaiasky/blob/2.0.0/core/src/gaia/cu9/ari/gaiaorbit/script/IScriptingInterface.java>`__
 - `API Gaia Sky 1.5.0 <https://github.com/langurmonkey/gaiasky/blob/1.5.0/core/src/gaia/cu9/ari/gaiaorbit/script/IScriptingInterface.java>`__
 - `API Gaia Sky 1.0.4 <https://github.com/langurmonkey/gaiasky/blob/1.0.4/core/src/gaia/cu9/ari/gaiaorbit/script/IScriptingInterface.java>`__
 - `API Gaia Sky 1.0.3 <https://github.com/langurmonkey/gaiasky/blob/1.0.3/core/src/gaia/cu9/ari/gaiaorbit/script/IScriptingInterface.java>`__

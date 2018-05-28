@@ -10,7 +10,7 @@ public class Constants {
     /**
      * Scale factor that applies to all distances.
      */
-    public static final double SCALE_FACTOR = 5e-6;
+    public static final double SCENE_SCALE_FACTOR = 5e-6;
 
     /**
      * Metre to local unit conversion. Multiply this by all values in m.
@@ -41,9 +41,19 @@ public class Constants {
     public static final double U_TO_AU = 1 / AU_TO_U;
 
     /**
+     * Parsecs to km conversion
+     */
+    public static final double PC_TO_KM = AstroUtils.PC_TO_KM;
+
+    /**
+     * Km to parsecs conversion
+     */
+    public static final double KM_TO_PC = AstroUtils.KM_TO_PC;
+
+    /**
      * Parsec to local unit conversion. Multiply this by all values in pc.
      */
-    public static final double PC_TO_U = AstroUtils.PC_TO_KM * KM_TO_U;
+    public static final double PC_TO_U = PC_TO_KM * KM_TO_U;
 
     /**
      * Kiloparsec to local unit conversion. Multiply this by all values in Kpc.
@@ -132,7 +142,7 @@ public class Constants {
     public static final double U_TO_Ro = 1 / Ro_TO_U;
 
     /** Multiplier for all KM values in the application **/
-    public static final double KM_MULTIPLIER = AstroUtils.KM_TO_PC * 1e9 * SCALE_FACTOR;
+    public static final double KM_MULTIPLIER = AstroUtils.KM_TO_PC * 1e9 * SCENE_SCALE_FACTOR;
 
     /** Distance from Sun that marks the end of the solar system **/
     public static final double SOLAR_SYSTEM_THRESHOLD = 5e9 * KM_MULTIPLIER;

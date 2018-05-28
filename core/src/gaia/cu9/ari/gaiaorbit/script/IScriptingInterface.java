@@ -1161,6 +1161,38 @@ public interface IScriptingInterface {
     public double[] internalCartesianToEquatorial(double x, double y, double z);
 
     /**
+     * Converts equatorial cartesian coordinates (in the internal reference system)
+     * to galactic cartesian coordinates.
+     * @param eq Vector with [x, y, z] equatorial cartesian coordinates
+     * @return Vector with [x, y, z] galactic cartesian coordinates
+     */
+    public double[] equatorialToGalactic(double[] eq);
+
+    /**
+     * Converts equatorial cartesian coordinates (in the internal reference system)
+     * to ecliptic cartesian coordinates.
+     * @param eq Vector with [x, y, z] equatorial cartesian coordinates
+     * @return Vector with [x, y, z] ecliptic cartesian coordinates
+     */
+    public double[] equatorialToEcliptic(double[] eq);
+
+    /**
+     * Converts galactic cartesian coordinates (in the internal reference system)
+     * to equatorial cartesian coordinates.
+     * @param gal Vector with [x, y, z] galactic cartesian coordinates
+     * @return Vector with [x, y, z] equatorial cartesian coordinates
+     */
+    public double[] galacticToEquatorial(double[] gal);
+
+    /**
+     * Converts ecliptic cartesian coordinates (in the internal reference system)
+     * to equatorial cartesian coordinates.
+     * @param ecl Vector with [x, y, z] ecliptic cartesian coordinates
+     * @return Vector with [x, y, z] equatorial cartesian coordinates
+     */
+    public double[] eclipticToEquatorial(double[] ecl);
+
+    /**
      * Sets the brightness level of the render system.
      * 
      * @param level
@@ -1295,5 +1327,39 @@ public interface IScriptingInterface {
      *            Activate (true) or deactivate (false)
      */
     public void setSmoothLodTransitions(boolean value);
+
+    /**
+     * Rotates a 3D vector around the given axis by the specified angle in degrees.
+     * Vectors are arrays with 3 components. If more components are there, they are ignored.
+     * @param vector Vector to rotate, with at least 3 components
+     * @param axis The axis, with at least 3 components
+     * @param angle Angle in degrees
+     * @return The new vector, rotated
+     */
+    public double[] rotate3(double[] vector, double[] axis, double angle);
+
+    /**
+     * Rotates a 2D vector by the specified angle in degrees, counter-clockwise assuming that
+     * the y axis points up.
+     * @param vector Vector to rotate, with at least 2 components
+     * @return The new vector, rotated
+     */
+    public double[] rotate2(double[] vector, double angle);
+
+    /**
+     * Computes the cross product between the two 3D vectors.
+     * @param vec1 First 3D vector
+     * @param vec2 Second 3D vector
+     * @return Cross product 3D vector
+     */
+    public double[] cross3(double[] vec1, double[] vec2);
+
+    /**
+     * Computes the dot product between the two 3D vectors.
+     * @param vec1 First 3D vector
+     * @param vec2 Second 3D vector
+     * @return The dot product scalar
+     */
+    public double dot3(double[] vec1, double[] vec2);
 
 }

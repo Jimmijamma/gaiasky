@@ -1,39 +1,89 @@
 {"objects" : [
-
 	{
 	"name" : "Equatorial grid",
-	"color" : [1.0, 0.0, 0.0, 0.5],
+	"color" : [8.0, 0.0, 0.0, 0.5],
 	"size" : 1.2e12,
 	"ct" : Equatorial,
+	"label" : false,
+	"labelcolor": [1.0, 0.5, 0.5, 1.0],
 
 	"parent" : "Universe", 
-	"impl" : "gaia.cu9.ari.gaiaorbit.scenegraph.Grid"
-	},
+	"impl" : "gaia.cu9.ari.gaiaorbit.scenegraph.Grid",
 	
+	"coordinates" : {
+				// This must implement gaia.cu9.ari.gaiaorbit.util.coord.IBodyCoordinates				
+				"impl" : "gaia.cu9.ari.gaiaorbit.util.coord.StaticCoordinates",
+				"position" : [0.0, 0.0, 0.0]
+				},
+	
+ 	"model" : {
+				"args" : [true],
+				"type" : "sphere",
+				"params" : {
+							"quality" : 90,
+							"diameter" : 1.0,
+							"flip" : true
+							}
+				}
+	},
 	
 	{
 	"name" : "Ecliptic grid",
-	"color" : [0.0, 1.0, 0.0, 0.5],
+	"color" : [0.0, 8.0, 0.0, 0.5],
 	"size" : 1.3e12,
 	"ct" : Ecliptic,
+	"label" : false,
+	"labelcolor": [0.5, 1.0, 0.5, 1.0],
 	"transformName" : eclipticToEquatorial,
 
 	"parent" : "Universe", 
 	"impl" : "gaia.cu9.ari.gaiaorbit.scenegraph.Grid"
-	},
+
+	"coordinates" : {
+				// This must implement gaia.cu9.ari.gaiaorbit.util.coord.IBodyCoordinates				
+				"impl" : "gaia.cu9.ari.gaiaorbit.util.coord.StaticCoordinates",
+				"position" : [0.0, 0.0, 0.0]
+				},
 	
+ 	"model" : {
+				"args" : [true],
+				"type" : "sphere",
+				"params" : {
+							"quality" : 90,
+							"diameter" : 1.0,
+							"flip" : true
+							}
+				}
+	},
 	
 	{
 	"name" : "Galactic grid",
-	"color" : [0.3, 0.5, 1.0, 0.5],
+	"color" : [0.2, 0.4, 8.0, 0.5],
 	"size" : 1.4e12,
 	"ct" : Galactic,
+	"label" : false,
+	"labelcolor": [0.8, 0.8, 1.0, 1.0],
 	"transformName" : galacticToEquatorial,
 
 	"parent" : "Universe", 
 	"impl" : "gaia.cu9.ari.gaiaorbit.scenegraph.Grid"
-	},
+
+	"coordinates" : {
+				// This must implement gaia.cu9.ari.gaiaorbit.util.coord.IBodyCoordinates				
+				"impl" : "gaia.cu9.ari.gaiaorbit.util.coord.StaticCoordinates",
+				"position" : [0.0, 0.0, 0.0]
+				},
 	
+ 	"model" : {
+				"args" : [true],
+				"type" : "sphere",
+				"params" : {
+							"quality" : 90,
+							"diameter" : 1.0,
+							"flip" : true
+							}
+				}
+	},
 	
 	{
 	"name" : "Milky Way",
@@ -62,9 +112,9 @@
 				},
 	
 	"galaxydata" : {
-				"starsource" : "data/galaxy/galaxy_40000particles.dat",
 				//"starsource" : "data/galaxy/galaxy_BulgeMain.dat",
 				//"dustsource" : "data/galaxy/galaxy_ArmDust.dat",
+				"starsource" : "data/galaxy/galaxy_40000particles.dat",
 				"nebulasource" : "data/galaxy/galaxy_80particles.dat"
 				},
 	"model" : {
@@ -139,20 +189,6 @@
 	},
 	
 	{
-		"name" : "Planck CMB hook",
-		"position" : [0.0, 0.0, 0.0],
-	
-		"ct" : Galaxies,
-	
-		// Fade distances, in parsecs
-		"fadein" : [1.0e9, 20.0e9],
-		
-	
-		"parent" : "Universe", 
-		"impl" : "gaia.cu9.ari.gaiaorbit.scenegraph.FadeNode",
-	},
-	
-	{
 		"name" : "Cosmic Microwave Background",
 		"color" : [1.0, 1.0, 1.0, 0.5],
 		"size" : 1e4,
@@ -162,8 +198,11 @@
 		"label2d" : true,
 		// x, y, scale
 		"labelposition" : [200.0, 200.0, 2.0],
+
+		// Fade distances, in parsecs
+		"fadein" : [1.0e9, 20.0e9],
 		
-		"parent" : "Planck CMB hook", 
+		"parent" : "Universe", 
 		"impl" : "gaia.cu9.ari.gaiaorbit.scenegraph.BackgroundModel",
 	
 		"coordinates" : {
@@ -190,9 +229,9 @@
 		"name" : "Oort cloud",
 		"position" : [0.0, 0.0, 0.0],
 		// Color of particles
-		"color" : [0.6, 0.8, 0.95, 0.5],
+		"color" : [0.6, 0.6, 0.65, 0.8],
 		// Size of particles
-		"size" : 4.0,
+		"size" : 1.5,
 		"labelcolor" : [0.3, 0.6, 1.0, 1.0],
 		// Position in parsecs
 		"labelposition" : [0.0484814, 0.0, 0.0484814]
@@ -202,7 +241,7 @@
 		"fadein" : [0.0004, 0.004],
 		"fadeout" : [0.1, 1.8],
 		
-		"profiledecay" : 0.7,
+		"profiledecay" : 0.1,
 		
 	
 		"parent" : "Universe", 

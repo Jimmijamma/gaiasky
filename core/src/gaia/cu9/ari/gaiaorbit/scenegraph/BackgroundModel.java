@@ -17,6 +17,7 @@ import gaia.cu9.ari.gaiaorbit.render.I3DTextRenderable;
 import gaia.cu9.ari.gaiaorbit.render.IModelRenderable;
 import gaia.cu9.ari.gaiaorbit.render.RenderingContext;
 import gaia.cu9.ari.gaiaorbit.render.system.FontRenderSystem;
+import gaia.cu9.ari.gaiaorbit.scenegraph.camera.ICamera;
 import gaia.cu9.ari.gaiaorbit.scenegraph.component.ModelComponent;
 import gaia.cu9.ari.gaiaorbit.util.Constants;
 import gaia.cu9.ari.gaiaorbit.util.Logger;
@@ -25,17 +26,20 @@ import gaia.cu9.ari.gaiaorbit.util.math.Matrix4d;
 import gaia.cu9.ari.gaiaorbit.util.math.Vector3d;
 import gaia.cu9.ari.gaiaorbit.util.time.ITimeFrameProvider;
 
-/** 
+/**
  * A model which renders as a background, unaffected by the camera. It should
  * usually be a flipped sphere or cubemap.
+ * 
  * @author tsagrista
  *
  */
 public class BackgroundModel extends FadeNode implements IModelRenderable, I3DTextRenderable {
 
-    private String transformName;
+    protected String transformName;
     public ModelComponent mc;
     private boolean label, label2d;
+
+    private RenderGroup renderGroupModel = RenderGroup.MODEL_DEFAULT;
 
     public BackgroundModel() {
         super();
@@ -74,8 +78,9 @@ public class BackgroundModel extends FadeNode implements IModelRenderable, I3DTe
         // Must rotate due to orientation of createCylinder
         localTransform.rotate(0, 1, 0, 90);
 
+
         // Model
-        mc.doneLoading(manager, localTransform, null);
+        mc.doneLoading(manager, localTransform, cc);
 
         // Label pos 3D
         if (label && labelPosition != null && !label2d) {
@@ -89,7 +94,7 @@ public class BackgroundModel extends FadeNode implements IModelRenderable, I3DTe
         // Render group never changes
         // Add to toRender list
         if (opacity > 0) {
-            addToRender(this, RenderGroup.MODEL_DEFAULT);
+            addToRender(this, renderGroupModel);
             if (label) {
                 addToRender(this, RenderGroup.FONT_LABEL);
             }
@@ -194,5 +199,8 @@ public class BackgroundModel extends FadeNode implements IModelRenderable, I3DTe
         return label;
     }
 
+    public void setRendergroup(String rg) {
+        this.renderGroupModel = RenderGroup.valueOf(rg);
+    }
 
 }

@@ -13,6 +13,7 @@ import gaia.cu9.ari.gaiaorbit.GaiaSky;
 import gaia.cu9.ari.gaiaorbit.render.ComponentType;
 import gaia.cu9.ari.gaiaorbit.render.IRenderable;
 import gaia.cu9.ari.gaiaorbit.render.SceneGraphRenderer;
+import gaia.cu9.ari.gaiaorbit.scenegraph.camera.ICamera;
 import gaia.cu9.ari.gaiaorbit.scenegraph.octreewrapper.AbstractOctreeWrapper;
 import gaia.cu9.ari.gaiaorbit.util.ComponentTypes;
 import gaia.cu9.ari.gaiaorbit.util.I18n;
@@ -101,6 +102,10 @@ public class SceneGraphNode implements IStarContainer, IPosition {
         LINE_GPU(18),
         /** Particle positions from orbital elements **/
         PARTICLE_ORBIT_ELEMENTS(19),
+        /** Transparent meshes **/
+        MODEL_MESH(20),
+        /** Grids shader **/
+        MODEL_GRIDS(21),
 
         /** None **/
         NONE(-1);
